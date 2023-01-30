@@ -244,7 +244,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} - node_memory_MemAvailable_bytes{job=\"node-exporter\"}) / sum(node_memory_MemTotal_bytes{job=\"node-exporter\"})",
+          "expr": "sum(node_memory_MemTotal_bytes{job=\"kubernetes-service-endpoints\"} - node_memory_MemAvailable_bytes{job=\"kubernetes-service-endpoints\"}) / sum(node_memory_MemTotal_bytes{job=\"kubernetes-service-endpoints\"})",
           "interval": "",
           "legendFormat": "Real",
           "range": true,
@@ -328,10 +328,12 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "count(up{job=\"node-exporter\"})",
+          "expr": "count(up{job=\"kubernetes-nodes\"})",
           "interval": "",
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -690,7 +692,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(1-rate(node_cpu_seconds_total{mode=\"idle\", job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
+          "expr": "sum(1-rate(node_cpu_seconds_total{mode=\"idle\", job=\"node-exporter\"}[$__rate_interval]))",
           "interval": "",
           "legendFormat": "Real",
           "range": true,
@@ -789,7 +791,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} - node_memory_MemAvailable_bytes{job=\"node-exporter\"})",
+          "expr": "sum(node_memory_MemTotal_bytes{job=\"kubernetes-service-endpoints\"} - node_memory_MemAvailable_bytes{job=\"kubernetes-service-endpoints\"})",
           "interval": "",
           "legendFormat": "Real",
           "range": true,
@@ -1004,10 +1006,12 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "avg(1-rate(node_cpu_seconds_total{mode=\"idle\", job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
           "interval": "$resolution",
           "legendFormat": "CPU usage in %",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1168,8 +1172,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1213,10 +1216,12 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(container_cpu_usage_seconds_total{image!=\"\"}[$__rate_interval])) by (namespace)",
           "interval": "$resolution",
           "legendFormat": "{{ namespace }}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1268,8 +1273,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1413,10 +1417,12 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "avg(1-rate(node_cpu_seconds_total{mode=\"idle\", job=\"kubernetes-service-endpoints\"}[$__rate_interval])) by (instance)",
           "interval": "$resolution",
           "legendFormat": "{{ node }}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1514,7 +1520,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} - node_memory_MemAvailable_bytes{job=\"node-exporter\"}) by (instance)",
+          "expr": "sum(node_memory_MemTotal_bytes{job=\"kubernetes-service-endpoints\"} - node_memory_MemAvailable_bytes{job=\"kubernetes-service-endpoints\"}) by (instance)",
           "interval": "$resolution",
           "legendFormat": "{{ node}}",
           "range": true,
@@ -1626,7 +1632,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(rate(node_network_receive_bytes_total{job=\"node-exporter\"}[$__rate_interval]))",
+          "expr": "sum(rate(node_network_receive_bytes_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
           "interval": "$resolution",
           "legendFormat": "Total received bytes",
           "range": true,
@@ -1639,7 +1645,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "- sum(rate(node_network_transmit_bytes_total{job=\"node-exporter\"}[$__rate_interval]))",
+          "expr": "- sum(rate(node_network_transmit_bytes_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
           "interval": "$resolution",
           "legendFormat": "Total transmitted bytes",
           "range": true,
@@ -1734,7 +1740,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(rate(node_network_receive_drop_total{job=\"node-exporter\"}[$__rate_interval]))",
+          "expr": "sum(rate(node_network_receive_drop_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
           "interval": "$resolution",
           "legendFormat": "Packets dropped (receive)",
           "range": true,
@@ -1747,7 +1753,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "- sum(rate(node_network_transmit_drop_total{job=\"node-exporter\"}[$__rate_interval]))",
+          "expr": "- sum(rate(node_network_transmit_drop_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval]))",
           "interval": "$resolution",
           "legendFormat": "Packets dropped (transmit)",
           "range": true,
@@ -1950,7 +1956,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(rate(node_network_receive_bytes_total{job=\"node-exporter\"}[$__rate_interval])) by (instance)",
+          "expr": "sum(rate(node_network_receive_bytes_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval])) by (instance)",
           "interval": "$resolution",
           "legendFormat": "Received bytes in {{ instance }}",
           "range": true,
@@ -1962,7 +1968,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "- sum(rate(node_network_transmit_bytes_total{job=\"node-exporter\"}[$__rate_interval])) by (instance)",
+          "expr": "- sum(rate(node_network_transmit_bytes_total{job=\"kubernetes-service-endpoints\"}[$__rate_interval])) by (instance)",
           "hide": false,
           "interval": "$resolution",
           "legendFormat": "Transmitted bytes in {{ instance }}",
@@ -1974,7 +1980,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "5m",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [

@@ -4,7 +4,8 @@ generatorOptions:
   labels:
     grafana_dashboard: "true"
 commonAnnotations:
-  grafana_folder: "Kubernetes"
+  #grafana_folder: "Kubernetes"
+  grafana_folder: "General"
 #namespace: monitoring
 
 # Generate a ConfigMap for each dashboard

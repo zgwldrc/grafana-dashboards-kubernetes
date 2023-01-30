@@ -13,7 +13,7 @@ spec:
   project: default # You may need to change this!
   source:
     path: ./
-    repoURL: https://github.com/dotdc/grafana-dashboards-kubernetes
+    repoURL: https://github.com/zgwldrc/grafana-dashboards-kubernetes.git
     targetRevision: HEAD
 
   destination:

@@ -1158,7 +1158,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(rate(container_cpu_usage_seconds_total{instance=\"$node\", image!=\"\"}[$__rate_interval])) by (pod)",
+            "expr": "sum(rate(container_cpu_usage_seconds_total{node=\"$node\", image!=\"\"}[$__rate_interval])) by (pod)",
             "interval": "$resolution",
             "legendFormat": "{{ pod }}",
             "range": true,
@@ -1254,7 +1254,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(container_memory_working_set_bytes{instance=\"$node\", image!=\"\"}) by (pod)",
+            "expr": "sum(container_memory_working_set_bytes{node=\"$node\", image!=\"\"}) by (pod)",
             "interval": "$resolution",
             "legendFormat": "{{ pod }}",
             "range": true,
@@ -1329,7 +1329,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1450,7 +1451,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1561,7 +1563,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1671,7 +1674,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1798,7 +1802,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1906,7 +1911,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2012,7 +2018,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2120,7 +2127,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2226,7 +2234,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2321,7 +2330,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2464,7 +2474,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2504,7 +2515,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(kubelet_volume_stats_used_bytes{instance=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_capacity_bytes{instance=\"$node\"}) by (persistentvolumeclaim)",
+            "expr": "sum(kubelet_volume_stats_used_bytes{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_capacity_bytes{node=\"$node\"}) by (persistentvolumeclaim)",
             "interval": "$resolution",
             "legendFormat": "{{ persistentvolumeclaim }}",
             "range": true,
@@ -2535,7 +2546,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2599,7 +2611,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(kubelet_volume_stats_used_bytes{instance=\"$node\"}) by (persistentvolumeclaim)",
+            "expr": "sum(kubelet_volume_stats_used_bytes{node=\"$node\"}) by (persistentvolumeclaim)",
             "format": "table",
             "hide": false,
             "interval": "",
@@ -2721,7 +2733,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2761,7 +2774,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(kubelet_volume_stats_inodes_used{instance=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_inodes{instance=\"$node\"}) by (persistentvolumeclaim) * 100",
+            "expr": "sum(kubelet_volume_stats_inodes_used{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_inodes{node=\"$node\"}) by (persistentvolumeclaim) * 100",
             "interval": "$resolution",
             "legendFormat": "{{ persistentvolumeclaim }}",
             "range": true,
@@ -2834,7 +2847,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2931,7 +2945,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3028,7 +3043,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3124,7 +3140,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3221,7 +3238,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3317,7 +3335,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3616,9 +3635,9 @@
         },
         {
           "current": {
-            "selected": true,
-            "text": "30s",
-            "value": "30s"
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
           },
           "hide": 0,
           "includeAll": false,
@@ -3636,7 +3655,7 @@
               "value": "15s"
             },
             {
-              "selected": true,
+              "selected": false,
               "text": "30s",
               "value": "30s"
             },
@@ -3651,7 +3670,7 @@
               "value": "3m"
             },
             {
-              "selected": false,
+              "selected": true,
               "text": "5m",
               "value": "5m"
             }
@@ -3664,8 +3683,8 @@
         {
           "current": {
             "selected": false,
-            "text": "ip-172-31-135-217.ap-southeast-1.compute.internal",
-            "value": "ip-172-31-135-217.ap-southeast-1.compute.internal"
+            "text": "ip-172-31-52-237.ap-southeast-1.compute.internal",
+            "value": "ip-172-31-52-237.ap-southeast-1.compute.internal"
           },
           "datasource": {
             "type": "prometheus",
@@ -3690,8 +3709,8 @@
         {
           "current": {
             "selected": false,
-            "text": "172.31.135.217:9100",
-            "value": "172.31.135.217:9100"
+            "text": "172.31.52.237:9100",
+            "value": "172.31.52.237:9100"
           },
           "datasource": {
             "type": "prometheus",
@@ -3716,7 +3735,7 @@
       ]
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-6h",
       "to": "now"
     },
     "timepicker": {},

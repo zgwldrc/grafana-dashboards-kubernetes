@@ -28,7 +28,6 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 13966,
     "graphTooltip": 0,
-    "id": 16,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -545,10 +544,6 @@
               "$__all"
             ]
           },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
           "definition": "label_values(kafka_consumer_group_ConsumerLagMetrics_Value,instance)",
           "hide": 0,
           "includeAll": true,
@@ -570,9 +565,13 @@
         },
         {
           "current": {
-            "selected": true,
-            "text": "deals",
-            "value": "deals"
+            "selected": false,
+            "text": "__amazon_msk_canary",
+            "value": "__amazon_msk_canary"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
           },
           "definition": "label_values(kafka_consumer_group_ConsumerLagMetrics_Value,topic)",
           "hide": 0,
@@ -613,6 +612,6 @@
     "timezone": "",
     "title": "Kafka Consumer Group View",
     "uid": "_ZbXJQYMz",
-    "version": 6,
+    "version": 1,
     "weekStart": ""
   }

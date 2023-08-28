@@ -1,48 +1,4 @@
 {
-    "__inputs": [
-      {
-        "name": "DS_FUTURE-FERRET-EXPORTER",
-        "label": "future-ferret-exporter",
-        "description": "",
-        "type": "datasource",
-        "pluginId": "mysql",
-        "pluginName": "MySQL"
-      },
-      {
-        "name": "VAR_START",
-        "type": "constant",
-        "label": "开始时间",
-        "value": "2023-07-01 00:00:00",
-        "description": ""
-      }
-    ],
-    "__elements": {},
-    "__requires": [
-      {
-        "type": "grafana",
-        "id": "grafana",
-        "name": "Grafana",
-        "version": "9.3.1"
-      },
-      {
-        "type": "datasource",
-        "id": "mysql",
-        "name": "MySQL",
-        "version": "1.0.0"
-      },
-      {
-        "type": "panel",
-        "id": "stat",
-        "name": "Stat",
-        "version": ""
-      },
-      {
-        "type": "panel",
-        "id": "table",
-        "name": "Table",
-        "version": ""
-      }
-    ],
     "annotations": {
       "list": [
         {
@@ -75,7 +31,7 @@
       {
         "datasource": {
           "type": "mysql",
-          "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
@@ -127,7 +83,7 @@
             "dataset": "dear",
             "datasource": {
               "type": "mysql",
-              "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
             "editorMode": "code",
             "format": "table",
@@ -159,7 +115,7 @@
       {
         "datasource": {
           "type": "mysql",
-          "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
@@ -211,7 +167,7 @@
             "dataset": "dear",
             "datasource": {
               "type": "mysql",
-              "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
             "editorMode": "code",
             "format": "table",
@@ -243,7 +199,7 @@
       {
         "datasource": {
           "type": "mysql",
-          "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
@@ -295,7 +251,7 @@
             "dataset": "dear",
             "datasource": {
               "type": "mysql",
-              "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
             "editorMode": "code",
             "format": "table",
@@ -327,7 +283,7 @@
       {
         "datasource": {
           "type": "mysql",
-          "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
@@ -380,7 +336,7 @@
             "dataset": "dear",
             "datasource": {
               "type": "mysql",
-              "uid": "${DS_FUTURE-FERRET-EXPORTER}"
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
             "editorMode": "code",
             "format": "table",

@@ -1,35 +1,4 @@
 {
-    "__inputs": [
-      {
-        "name": "DS_PROMETHEUS",
-        "label": "Prometheus",
-        "description": "",
-        "type": "datasource",
-        "pluginId": "prometheus",
-        "pluginName": "Prometheus"
-      }
-    ],
-    "__elements": {},
-    "__requires": [
-      {
-        "type": "grafana",
-        "id": "grafana",
-        "name": "Grafana",
-        "version": "9.3.1"
-      },
-      {
-        "type": "panel",
-        "id": "graph",
-        "name": "Graph (old)",
-        "version": ""
-      },
-      {
-        "type": "datasource",
-        "id": "prometheus",
-        "name": "Prometheus",
-        "version": "1.0.0"
-      }
-    ],
     "annotations": {
       "list": [
         {
@@ -42,12 +11,6 @@
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
           "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
           "type": "dashboard"
         }
       ]
@@ -57,7 +20,7 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 16082,
     "graphTooltip": 0,
-    "id": null,
+    "id": 37,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -68,7 +31,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -100,7 +63,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -112,7 +75,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "kafka_consumer_group_ConsumerLagMetrics_Value{name=\"OffsetLag\", topic=~\".+\"}",
             "interval": "",
@@ -185,7 +148,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "description": "whether we're ingesting data to partition",
         "fill": 1,
@@ -218,7 +181,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -230,7 +193,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (topic, partition) (increase(kafka_log_Log_Value{name=\"LogEndOffset\", topic!~\"__.*\"}[5m])) \n",
             "hide": false,
@@ -278,7 +241,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -310,7 +273,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -322,7 +285,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (topic, partition) (increase(kafka_log_Log_Value{name=\"LogEndOffset\", topic!~\"__.*\"}[5m]))\n-\nsum by (topic, partition) (kafka_consumer_group_ConsumerLagMetrics_Value{name=\"OffsetLag\", topic=~\".+\"})",
             "interval": "",
@@ -395,7 +358,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -429,7 +392,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -441,7 +404,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (topic) (rate(kafka_server_BrokerTopicMetrics_Count{name=\"MessagesInPerSec\", topic=~\".+\"}[5m]))",
             "interval": "",
@@ -488,7 +451,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -522,7 +485,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -534,7 +497,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (topic) (rate(kafka_server_BrokerTopicMetrics_Count{name=\"BytesInPerSec\", topic=~\".+\"}[5m]))",
             "interval": "",
@@ -581,7 +544,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -615,7 +578,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -627,7 +590,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (topic) (rate(kafka_server_BrokerTopicMetrics_Count{name=\"BytesOutPerSec\", topic=~\".+\"}[5m]))",
             "interval": "",
@@ -700,11 +663,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -735,7 +697,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -747,7 +709,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (instance) (kafka_server_ReplicaManager_Value{name=\"UnderReplicatedPartitions\"})",
             "hide": false,
@@ -795,11 +757,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -830,7 +791,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -842,7 +803,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "kafka_server_ReplicaManager_Value{name=\"UnderMinIsrPartitionCount\"}",
             "hide": false,
@@ -890,11 +851,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -925,7 +885,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -937,7 +897,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "kafka_server_ReplicaManager_Value{name=\"PartitionCount\"}",
             "hide": false,
@@ -985,11 +945,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -1020,7 +979,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -1032,7 +991,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (instance)(rate(kafka_network_RequestMetrics_Count{name=\"RequestsPerSec\", request=~\"Produce|FetchConsumer|FetchFollower\"}[5m]))",
             "hide": false,
@@ -1080,11 +1039,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -1121,7 +1079,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -1133,7 +1091,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "(rate(kafka_network_RequestMetrics_Count{name=\"ErrorsPerSec\"}[5m]))",
             "interval": "",
@@ -1206,11 +1164,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -1241,7 +1198,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -1253,7 +1210,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "node_filesystem_avail_bytes{mountpoint=\"/kafka/datalogs\"}",
             "hide": false,
@@ -1301,11 +1258,10 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "links": []
           },
           "overrides": []
@@ -1336,7 +1292,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.2.1",
+        "pluginVersion": "10.0.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -1348,7 +1304,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "expr": "sum by (instance, mode) (rate(node_cpu_seconds_total[5m]))",
             "hide": false,
@@ -1391,7 +1347,7 @@
       }
     ],
     "refresh": "5m",
-    "schemaVersion": 37,
+    "schemaVersion": 38,
     "style": "dark",
     "tags": [
       "msk",
@@ -1418,8 +1374,8 @@
       ]
     },
     "timezone": "",
-    "title": "MSK ConsumerLag",
-    "uid": "27BWK5nGk",
+    "title": "MSK Overview2",
+    "uid": "27BWK5nGk2",
     "version": 1,
     "weekStart": ""
   }

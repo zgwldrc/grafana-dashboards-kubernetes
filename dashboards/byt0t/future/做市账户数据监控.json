@@ -809,7 +809,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -891,7 +891,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "editorMode": "builder",
             "expr": "sum by(contract) (maker_position_sum_monitor{asset=\"$Asset\"})",
@@ -907,7 +907,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -988,7 +988,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "prometheus"
             },
             "editorMode": "builder",
             "expr": "sum by(contract) (maker_position_profit_unreal_sum_monitor{asset=\"$Asset\"})",

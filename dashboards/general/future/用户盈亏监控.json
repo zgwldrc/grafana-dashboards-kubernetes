@@ -24,7 +24,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 42,
+    "id": 40,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -58,8 +58,94 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 6,
+          "w": 4,
           "x": 0,
+          "y": 0
+        },
+        "id": 18,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select sum(abs(`change`)) as total_deposit from user_balance_history where business = \"deposit\" and asset = \"$Asset\";",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户总充值",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
           "y": 0
         },
         "id": 20,
@@ -83,7 +169,6 @@
         "pluginVersion": "9.3.1",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
               "type": "mysql",
               "uid": "FUTURE-FERRET-EXPORTER"
@@ -91,7 +176,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select sum(funding)\nfrom maker_position_funding_history where asset = \"$Asset\" and floor(time) = UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE));",
+            "rawSql": "select sum(abs(`change`)) as total_withdraw from user_balance_history where business = \"withdraw\" and asset = \"$Asset\";",
             "refId": "A",
             "sql": {
               "columns": [
@@ -112,231 +197,7 @@
             }
           }
         ],
-        "title": "今日0点资金费",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "noValue": "0",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 0
-        },
-        "id": 28,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "valueSize": 60
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
-            },
-            "editorMode": "builder",
-            "expr": "maker_equity_sum_monitor{asset=\"$Asset\"}",
-            "hide": false,
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "总权益",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "noValue": "0",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 12,
-          "y": 0
-        },
-        "id": 30,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "valueSize": 80
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
-            },
-            "editorMode": "builder",
-            "expr": "maker_pnl_sum_monitor{asset=\"$Asset\"}",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "总盈亏",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "mysql",
-          "uid": "FUTURE-FERRET-EXPORTER"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 18,
-          "y": 0
-        },
-        "id": 32,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "valueSize": 80
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "mysql",
-              "uid": "FUTURE-FERRET-EXPORTER"
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "select sum(funding) as funding from maker_position_funding_history where asset = \"$Asset\";\n",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "总资金费",
+        "title": "用户总提现",
         "type": "stat"
       },
       {
@@ -369,96 +230,9 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 6,
-          "x": 0,
-          "y": 4
-        },
-        "id": 22,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "valueSize": 80
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-          {
-            "dataset": "dear",
-            "datasource": {
-              "type": "mysql",
-              "uid": "FUTURE-FERRET-EXPORTER"
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "select sum(funding)\nfrom maker_position_funding_history where asset = \"$Asset\" and `time` > (UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE)) + 4 * 3600) and `time` < (UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE)) + 12 * 3600);\n ",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "今日8点资金费",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "mysql",
-          "uid": "FUTURE-FERRET-EXPORTER"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "noValue": "0",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 4
+          "w": 4,
+          "x": 8,
+          "y": 0
         },
         "id": 26,
         "options": {
@@ -488,7 +262,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select sum(`change`) as profit from maker_balance_history where asset = \"$Asset\" and business = \"trade\" and `time` < (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));\n",
+            "rawSql": "select count(1) as total_deposit_count from user_balance_history where business = \"deposit\" and asset = \"$Asset\";",
             "refId": "A",
             "sql": {
               "columns": [
@@ -509,7 +283,7 @@
             }
           }
         ],
-        "title": "昨日累计已实现盈亏",
+        "title": "用户充值总次数",
         "type": "stat"
       },
       {
@@ -542,11 +316,529 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 6,
+          "w": 4,
+          "x": 12,
+          "y": 0
+        },
+        "id": 28,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select count(1) as total_withdraw_count from user_balance_history where business = \"withdraw\" and asset = \"$Asset\";",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户提现总次数",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 16,
+          "y": 0
+        },
+        "id": 10,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "dataset": "dear",
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select sum(abs(`change`)) as total_fee from user_balance_history where business = \"fee\" and asset = \"$Asset\";",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户总手续费",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "id": 14,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "dataset": "dear",
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select total from user_insurance_history where asset = \"$Asset\" order by id desc limit 1\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户风险基金",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 4
+        },
+        "id": 46,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select sum(abs(`change`)) as total_deposit from user_balance_history where business = \"deposit\" and asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户每日充值",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 4
+        },
+        "id": 48,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select sum(abs(`change`)) as total_withdraw from user_balance_history where business = \"withdraw\" and asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户每日提现",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 8,
+          "y": 4
+        },
+        "id": 50,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 80
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select count(1) as total_deposit_count from user_balance_history where business = \"deposit\" and asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户每日充值次数",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
           "x": 12,
           "y": 4
         },
-        "id": 2,
+        "id": 52,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -567,7 +859,6 @@
         "pluginVersion": "9.3.1",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
               "type": "mysql",
               "uid": "FUTURE-FERRET-EXPORTER"
@@ -575,7 +866,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select sum(`change`) as profit from maker_balance_history where asset = \"$Asset\" and business = \"trade\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));\n",
+            "rawSql": "select count(1) as total_withdraw_count from user_balance_history where business = \"withdraw\" and asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));",
             "refId": "A",
             "sql": {
               "columns": [
@@ -596,7 +887,7 @@
             }
           }
         ],
-        "title": "今日已实现盈亏",
+        "title": "用户每日提现次数",
         "type": "stat"
       },
       {
@@ -629,11 +920,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 6,
-          "x": 18,
+          "w": 4,
+          "x": 16,
           "y": 4
         },
-        "id": 4,
+        "id": 54,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -654,7 +945,6 @@
         "pluginVersion": "9.3.1",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
               "type": "mysql",
               "uid": "FUTURE-FERRET-EXPORTER"
@@ -662,7 +952,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select sum(funding)\nfrom maker_position_funding_history where asset = \"$Asset\" and `time` > (UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE)) - 4*3600) and `time` < (UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE)) + 20*3600);",
+            "rawSql": "select sum(abs(`change`)) as total_fee from user_balance_history where business = \"fee\" and asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));",
             "refId": "A",
             "sql": {
               "columns": [
@@ -683,7 +973,7 @@
             }
           }
         ],
-        "title": "今日资金费盈亏",
+        "title": "用户每日手续费",
         "type": "stat"
       },
       {
@@ -716,11 +1006,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 6,
-          "x": 0,
-          "y": 8
+          "w": 4,
+          "x": 20,
+          "y": 4
         },
-        "id": 18,
+        "id": 56,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -741,7 +1031,6 @@
         "pluginVersion": "9.3.1",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
               "type": "mysql",
               "uid": "FUTURE-FERRET-EXPORTER"
@@ -749,7 +1038,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select sum(funding)\nfrom maker_position_funding_history where asset = \"$Asset\" and `time` > (UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE)) - 12 * 3600) and `time` < UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE));\n\n",
+            "rawSql": "select sum(`change`) as total from user_insurance_history where asset = \"$Asset\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));\n",
             "refId": "A",
             "sql": {
               "columns": [
@@ -770,94 +1059,7 @@
             }
           }
         ],
-        "title": "昨日16点资金费",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "mysql",
-          "uid": "FUTURE-FERRET-EXPORTER"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "noValue": "0",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 8
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "valueSize": 80
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-          {
-            "dataset": "dear",
-            "datasource": {
-              "type": "mysql",
-              "uid": "FUTURE-FERRET-EXPORTER"
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "select sum(`change`) as profit from maker_balance_history where asset = \"$Asset\" and business = \"trade\";",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "今日累计已实现盈亏",
+        "title": "用户每日风险基金",
         "type": "stat"
       },
       {
@@ -914,12 +1116,12 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 12,
+          "h": 8,
+          "w": 8,
+          "x": 0,
           "y": 8
         },
-        "id": 14,
+        "id": 22,
         "options": {
           "legend": {
             "calcs": [],
@@ -935,7 +1137,6 @@
         "pluginVersion": "9.3.1",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
               "type": "mysql",
               "uid": "FUTURE-FERRET-EXPORTER"
@@ -943,7 +1144,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select b.atime as time,b.sum_change as profit from (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(maker_balance_history.`time`)) AS DATE)) as atime,\n                                     sum(`change`) as sum_change\n                              from maker_balance_history\n                              where asset = \"$Asset\"\n                                and business = \"trade\"\n                                and `time` > (unix_timestamp() - $Days * 24 * 3600)     \n                              group by atime\n                              order by atime desc\n) as b",
+            "rawSql": "select bb.atime as time, sum(bb.deposit_amount) as deposit_amount, sum(bb.withdraw_amount) as withdraw_amount, sum(bb.deposit_amount - bb.withdraw_amount) as net_amount from\n(select b.atime, (case b.`business` when 'deposit' then b.sum_change else 0 end) deposit_amount, (case b.`business` when 'withdraw' then b.sum_change else 0 end) withdraw_amount\nfrom (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(user_balance_history.`time`)) AS DATE)) as atime,\n                                                                   `business`,\n                                                                   sum(abs(`change`)) as sum_change\n                                                            from user_balance_history\n                                                            where asset = \"$Asset\"\n                                                              and `time` > (unix_timestamp() - $Days * 24 * 3600)                                                  \n                                                            group by atime,`business` having `business` in (\"deposit\",\"withdraw\")\n                                                           ) as b) as bb group by bb.atime order by bb.atime desc",
             "refId": "A",
             "sql": {
               "columns": [
@@ -964,7 +1165,7 @@
             }
           }
         ],
-        "title": "每日已实现盈亏",
+        "title": "用户每日充提量统计",
         "type": "timeseries"
       },
       {
@@ -1021,9 +1222,221 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 18,
+          "h": 8,
+          "w": 4,
+          "x": 8,
+          "y": 8
+        },
+        "id": 30,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select bb.atime as time, sum(bb.deposit_count) as deposit_count, sum(bb.withdraw_count) as withdraw_count from\n(select b.atime,(case b.`business` when 'deposit' then b.count_change else 0 end) deposit_count, (case b.`business` when 'withdraw' then b.count_change else 0 end) withdraw_count \nfrom (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(user_balance_history.`time`)) AS DATE)) as atime,\n                                                                    `business`,\n                                                                    count(1) as count_change\n                                                             from user_balance_history\n                                                             where asset = \"$Asset\"\n                                                               and `time` > (unix_timestamp() - $Days * 24 * 3600) \n                                                             group by atime,`business` having `business` in (\"deposit\",\"withdraw\")\n                                                            ) as b) as bb group by bb.atime order by bb.atime desc",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户每日充提次数统计",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 12,
+          "y": 8
+        },
+        "id": 44,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select bb.atime as time, sum(bb.send_count) as send_count, sum(bb.recycle_count) as recycle_count from\n(select b.atime,(case b.`business` when 'experience_fund_reward_send' then b.count_change else 0 end) send_count, (case b.`business` when 'experience_fund_reward_recycle' then b.count_change else 0 end) recycle_count \nfrom (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(user_balance_history.`time`)) AS DATE)) as atime,\n                                                                    `business`,\n                                                                    count(1) as count_change\n                                                             from user_balance_history\n                                                             where asset = \"$Asset\"\n                                                               and `time` > (unix_timestamp() - $Days * 24 * 3600) \n                                                             group by atime,`business` having `business` in (\"experience_fund_reward_send\",\"experience_fund_reward_recycle\")\n                                                            ) as b) as bb group by bb.atime order by bb.atime desc",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "用户每日体验金领取次数统计",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 16,
           "y": 8
         },
         "id": 12,
@@ -1050,7 +1463,7 @@
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "select floor(`time`) as time, sum(funding) as funding\nfrom maker_position_funding_history where asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by floor(`time`) order by `time` desc;\n",
+            "rawSql": "select b.atime as time,b.sum_change as fee from (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(user_balance_history.`time`)) AS DATE)) as atime,\n                                                           sum(abs(`change`)) as sum_change\n                                                    from user_balance_history\n                                                    where asset = \"$Asset\"\n                                                      and business = \"fee\"\n                                                      and `time` > (unix_timestamp() - $Days * 24 * 3600) \n                                                    group by atime\n                                                    order by atime desc\n                                                   ) as b",
             "refId": "A",
             "sql": {
               "columns": [
@@ -1071,13 +1484,13 @@
             }
           }
         ],
-        "title": "每日资金费",
+        "title": "用户每日手续费",
         "type": "timeseries"
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus"
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
@@ -1121,22 +1534,17 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
-            },
-            "unit": "none"
+            }
           },
           "overrides": []
         },
         "gridPos": {
           "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 12
+          "w": 4,
+          "x": 20,
+          "y": 8
         },
         "id": 16,
         "options": {
@@ -1146,9 +1554,6 @@
             "placement": "bottom",
             "showLegend": true
           },
-          "timezone": [
-            "browser"
-          ],
           "tooltip": {
             "mode": "single",
             "sort": "none"
@@ -1158,59 +1563,50 @@
         "targets": [
           {
             "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
-            "editorMode": "builder",
-            "expr": "sum by(contract) (maker_position_sum_monitor{asset=\"$Asset\"})",
-            "hide": false,
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "C"
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select b.atime as time,b.sum_change as risk from (select UNIX_TIMESTAMP(CAST(from_unixtime(floor(user_insurance_history.`time`)) AS DATE)) as atime,\n                                                           sum(`change`) as sum_change\n                                                    from user_insurance_history\n                                                    where asset = \"$Asset\"\n                                                      and `time` > (unix_timestamp() - $Days * 24 * 3600) \n                                                    group by atime\n                                                    order by atime desc\n                                                   ) as b",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
           }
         ],
-        "title": "头寸监控",
+        "title": "用户每日风险基金",
         "type": "timeseries"
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus"
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
         },
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
+              "mode": "thresholds"
             },
             "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false
             },
             "mappings": [],
             "thresholds": {
@@ -1219,56 +1615,469 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
-            },
-            "unit": "none"
+            }
           },
           "overrides": []
         },
         "gridPos": {
           "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 12
+          "w": 4,
+          "x": 0,
+          "y": 16
         },
-        "id": 24,
+        "id": 34,
         "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
           },
-          "timezone": [
-            "browser"
-          ],
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
+          "showHeader": true,
+          "sortBy": []
         },
+        "pluginVersion": "9.3.1",
         "targets": [
           {
             "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
             },
-            "editorMode": "builder",
-            "expr": "sum by(contract) (maker_position_profit_unreal_sum_monitor{asset=\"$Asset\"})",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select user_id, sum(`change`) as deposit_amount from user_balance_history where business = \"deposit\" and asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by user_id order by deposit_amount desc;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
           }
         ],
-        "title": "浮动盈亏",
-        "type": "timeseries"
+        "title": "$Days天用户充值",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 4,
+          "y": 16
+        },
+        "id": 36,
+        "options": {
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select user_id, sum(abs(`change`)) as withdraw_amount from user_balance_history where business = \"withdraw\" and asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by user_id order by withdraw_amount desc;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "$Days天用户提现",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 8,
+          "y": 16
+        },
+        "id": 38,
+        "options": {
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select user_id, sum(`change`) as net_amount from user_balance_history where business in(\"deposit\",\"withdraw\") and asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by user_id order by net_amount desc;\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "$Days天用户净流入",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 12,
+          "y": 16
+        },
+        "id": 40,
+        "options": {
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select user_id, count(1) as trade_count from user_balance_history where business = \"trade\" and asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by user_id order by trade_count desc;\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "$Days天用户交易次数",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false,
+              "minWidth": 100
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 16,
+          "y": 16
+        },
+        "id": 8,
+        "options": {
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "dataset": "dear",
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select p.user_id, sum(`change`) as profit, abs(b.fee) as fee from user_balance_history as p left join (select user_id, sum(`change`) as fee from user_balance_history where business = \"fee\" and asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600) group by user_id)\n    as b on b.user_id = p.user_id where p.business = \"trade\" and p.asset = \"$Asset\" and p.`time` > (unix_timestamp() - $Days * 24 * 3600) group by p.user_id order by profit desc;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "$Days天已实现盈亏 手续费",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "FUTURE-FERRET-EXPORTER"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "displayMode": "auto",
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 20,
+          "y": 16
+        },
+        "id": 42,
+        "options": {
+          "footer": {
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "FUTURE-FERRET-EXPORTER"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "select a.user_id, count(1) as risk_count from (select user_id, position_id from user_insurance_history where (asset = \"$Asset\" and `time` > (unix_timestamp() - $Days * 24 * 3600)) group by user_id,position_id) as a group by a.user_id order by risk_count desc;\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "$Days天用户爆仓次数",
+        "type": "table"
       }
     ],
+    "refresh": false,
     "schemaVersion": 37,
     "style": "dark",
     "tags": [],
@@ -1276,7 +2085,7 @@
       "list": [
         {
           "current": {
-            "selected": true,
+            "selected": false,
             "text": "USDT",
             "value": "USDT"
           },
@@ -1298,17 +2107,8 @@
             }
           ],
           "query": "USDT,USTT",
-          "queryValue": "",
           "skipUrlSync": false,
           "type": "custom"
-        },
-        {
-          "hide": 2,
-          "label": "开始时间",
-          "name": "Start",
-          "query": "2023-06-01 00:00:00",
-          "skipUrlSync": false,
-          "type": "constant"
         },
         {
           "current": {
@@ -1316,7 +2116,7 @@
             "text": "7",
             "value": "7"
           },
-          "hide": 1,
+          "hide": 0,
           "includeAll": false,
           "label": "天数",
           "multi": false,
@@ -1347,6 +2147,14 @@
           "queryValue": "",
           "skipUrlSync": false,
           "type": "custom"
+        },
+        {
+          "hide": 2,
+          "label": "开始时间",
+          "name": "Start",
+          "query": "2023-06-01 00:00:00",
+          "skipUrlSync": false,
+          "type": "constant"
         }
       ]
     },
@@ -1356,8 +2164,8 @@
     },
     "timepicker": {},
     "timezone": "utc",
-    "title": "做市账户数据监控",
-    "uid": "THCZs0X4k",
+    "title": "用户盈亏监控",
+    "uid": "q3DxUAXVz",
     "version": 81,
     "weekStart": ""
-}
+  }

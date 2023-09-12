@@ -504,7 +504,7 @@
               "uid": "prometheus"
             },
             "editorMode": "builder",
-            "expr": "maker_equity_sum_monitor{asset=\"$Asset\"}",
+            "expr": "sum by(asset) (maker_equity_sum_monitor{asset=\"$Asset\"})",
             "instant": false,
             "range": true,
             "refId": "A"
@@ -592,7 +592,7 @@
               "uid": "prometheus"
             },
             "editorMode": "builder",
-            "expr": "maker_pnl_sum_monitor{asset=\"$Asset\"}",
+            "expr": "sum by(asset) (maker_pnl_sum_monitor{asset=\"$Asset\"})",
             "instant": false,
             "range": true,
             "refId": "A"

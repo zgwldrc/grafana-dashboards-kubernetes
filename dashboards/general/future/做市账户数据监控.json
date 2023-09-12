@@ -427,26 +427,51 @@
       },
       {
         "datasource": {
-          "type": "mysql",
-          "uid": "FUTURE-FERRET-EXPORTER"
+          "type": "prometheus",
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
             },
             "mappings": [],
-            "noValue": "0",
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
                 }
               ]
             }
@@ -454,63 +479,127 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 12,
+          "h": 8,
+          "w": 6,
           "x": 6,
           "y": 4
         },
-        "id": 2,
+        "id": 34,
         "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
           },
-          "text": {
-            "valueSize": 80
-          },
-          "textMode": "auto"
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
         },
-        "pluginVersion": "10.0.3",
         "targets": [
           {
-            "dataset": "dear",
             "datasource": {
-              "type": "mysql",
-              "uid": "FUTURE-FERRET-EXPORTER"
+              "type": "prometheus",
+              "uid": "prometheus"
             },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "select sum(`change`) as profit from maker_balance_history where asset = \"$Asset\" and business = \"trade\" and `time` >= (UNIX_TIMESTAMP() - MOD(UNIX_TIMESTAMP(), 86400));\n",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
+            "editorMode": "builder",
+            "expr": "maker_equity_sum_monitor{asset=\"$Asset\"}",
+            "instant": false,
+            "range": true,
+            "refId": "A"
           }
         ],
-        "title": "今日已实现盈亏",
-        "type": "stat"
+        "title": "总权益趋势",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 12,
+          "y": 4
+        },
+        "id": 33,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "builder",
+            "expr": "maker_pnl_sum_monitor{asset=\"$Asset\"}",
+            "instant": false,
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "总盈亏趋势",
+        "type": "timeseries"
       },
       {
         "datasource": {
@@ -741,8 +830,8 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 18,
-          "x": 6,
+          "w": 6,
+          "x": 18,
           "y": 8
         },
         "id": 12,
@@ -1078,6 +1167,6 @@
     "timezone": "utc",
     "title": "做市账户数据监控",
     "uid": "THCZs0X4k",
-    "version": 1,
+    "version": 2,
     "weekStart": ""
   }
